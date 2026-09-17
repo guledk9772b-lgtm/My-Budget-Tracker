@@ -1,0 +1,47 @@
+```css
+/* Element selector */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+/* Element selector */
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+/* Class selector */
+.expenses {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+/* ID selector */
+#add-expense {
+    background-color: #e8f4ff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+/* Element selector */
+input {
+    display: block;
+    width: 300px;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Element selector */
+label {
+    font-weight: bold;
+}
+```
