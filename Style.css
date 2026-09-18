@@ -1,5 +1,3 @@
-```css
-/* Element selector */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,41 +5,96 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Element selector */
-h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
+header {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-/* Class selector */
-.expenses {
-    background-color: white;
+header img {
+    vertical-align: middle;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.add-expense-section,
+.expenses-section,
+.help-section,
+.video-section {
+    background: white;
     padding: 20px;
-    margin-top: 20px;
+    margin-bottom: 20px;
     border-radius: 8px;
 }
 
-/* ID selector */
-#add-expense {
-    background-color: #e8f4ff;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 8px;
+/* Form styling */
+.add-expense-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-/* Element selector */
-input {
-    display: block;
-    width: 300px;
+input:not([type="submit"]),
+select {
     padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
-/* Element selector */
-label {
+input:focus,
+select:focus {
+    outline: 2px solid #777;
+}
+
+/* Direct child selector */
+.add-expense-section > form {
+    max-width: 500px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Expense table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+/* Position selector */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Descendant selector */
+.expenses-section td {
+    font-size: 15px;
+}
+
+/* Hover effect */
+tbody tr:hover {
+    background-color: #ddd;
+}
+
+/* Summary */
+summary {
+    cursor: pointer;
     font-weight: bold;
 }
-```
