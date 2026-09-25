@@ -1,259 +1,291 @@
 # SpendWise Dashboard
 
-SpendWise is a personal finance dashboard designed to help users understand their monthly budget, expenses, savings, and remaining balance.
+SpendWise is an interactive personal budgeting application that helps users manage their monthly budget and expenses.
 
-The project was initially created using HTML and CSS. JavaScript has now been added to make the application process budgeting information and perform calculations.
+The project started as a static HTML and CSS dashboard. This week, JavaScript was added to make SpendWise interactive and able to process user data.
 
 ## Project Files
 
-* `index.html` - Contains the structure of the SpendWise dashboard.
-* `style.css` - Contains the styling, layout, CSS Grid, Flexbox, colors, typography, and responsive design.
-* `script.js` - Contains the JavaScript variables, user input, calculations, and reusable functions.
-* `README.md` - Contains information about the project and the JavaScript concepts used.
+* `index.html` - Contains the structure of the SpendWise application.
+* `style.css` - Contains the layout, styling, responsive design, Grid, and Flexbox.
+* `script.js` - Contains the application logic, arrays, loops, conditionals, DOM manipulation, and event listeners.
+* `README.md` - Contains information about the project and the concepts implemented.
 
-## What SpendWise Does
+## Improvements Made This Week
 
-SpendWise provides a dashboard showing different financial categories:
+The following improvements were made to SpendWise:
 
-* Food
-* Transport
-* Rent
-* Entertainment
-* Savings
-* Utilities
+* Added an interactive budget form.
+* Added an interactive expense form.
+* Added an expense array to store multiple records.
+* Added loops to process expense records.
+* Added conditional statements for budget decisions.
+* Added DOM manipulation to update the webpage.
+* Added event listeners for user interactions.
+* Added dynamic expense records to the table.
+* Added dynamic category totals.
+* Added remaining balance calculations.
+* Added budget warnings and feedback messages.
 
-The JavaScript part of the application allows the user to enter a monthly budget and calculates the total expenses and remaining balance.
+## 1. Conditional Statements
 
-## JavaScript Concepts Implemented
+Conditional statements are used to make decisions based on the user's budget information.
 
-The following JavaScript concepts were implemented:
-
-* Variables
-* Data types
-* User input
-* Number conversion
-* Arithmetic calculations
-* Functions
-* Function parameters
-* Return values
-* Conditional statements
-* Console output
-
-## Variables
-
-Variables are used to store important budgeting and expense information.
-
-For example:
+For example, SpendWise checks whether the user has exceeded their budget:
 
 ```javascript
-let monthlyBudget = 0;
-let totalExpenses = 0;
-let remainingBalance = 0;
-```
-
-Expense values are also stored in variables:
-
-```javascript
-let foodExpense = 8500;
-let transportExpense = 4200;
-let rentExpense = 15000;
-let entertainmentExpense = 3000;
-let utilitiesExpense = 2800;
-```
-
-These variables allow the program to store and process financial information.
-
-## Data Types
-
-The project uses different JavaScript data types.
-
-Numbers are used for financial values:
-
-```javascript
-let foodExpense = 8500;
-```
-
-Strings are used when displaying messages:
-
-```javascript
-console.log("Monthly Budget: KSh " + monthlyBudget);
-```
-
-Boolean values are also indirectly used through conditions such as:
-
-```javascript
-if (monthlyBudget > 0) {
-    runBudgetCalculation();
+if (remainingBalance < 0) {
+    budgetMessage.textContent =
+        "Warning: You have exceeded your budget.";
 }
 ```
 
-## Collecting User Input
-
-The application uses the JavaScript `prompt()` function to collect the user's monthly budget.
+The application also checks whether the remaining balance is becoming low:
 
 ```javascript
-let userInput = prompt(
-    "Enter your monthly budget in KSh:"
-);
+else if (remainingBalance <= monthlyBudget * 0.2) {
+    budgetMessage.textContent =
+        "Be careful: your remaining balance is getting low.";
+}
 ```
 
-The value entered by the user is initially received as text.
+If the user is still within a comfortable budget range, the application displays a positive message.
 
-The `Number()` function converts the input into a number:
+## 2. Arrays
+
+An array is used to store multiple expense records.
 
 ```javascript
-monthlyBudget = Number(userInput);
+let expenses = [
+    {
+        name: "Lunch",
+        amount: 500,
+        category: "Food"
+    },
+    {
+        name: "Bus Fare",
+        amount: 300,
+        category: "Transport"
+    },
+    {
+        name: "Electricity",
+        amount: 1500,
+        category: "Utilities"
+    }
+];
 ```
 
-This allows the value to be used in mathematical calculations.
+This allows SpendWise to manage many expenses instead of creating a separate variable for every expense.
 
-## Budget Calculations
-
-The application calculates the total expenses using an addition operation.
+New expenses are added to the array using `push()`:
 
 ```javascript
-totalExpenses =
-    foodExpense +
-    transportExpense +
-    rentExpense +
-    entertainmentExpense +
-    utilitiesExpense;
+expenses.push({
+    name: name,
+    amount: amount,
+    category: category
+});
+```
+
+## 3. Loops
+
+A `for` loop is used to process all expense records.
+
+```javascript
+for (let i = 0; i < expenses.length; i++) {
+    total += expenses[i].amount;
+}
+```
+
+The loop goes through every expense and adds its amount to calculate the total expenses.
+
+Loops are also used when displaying expense records on the webpage.
+
+## 4. DOM Manipulation
+
+DOM manipulation allows JavaScript to change the webpage dynamically.
+
+SpendWise selects HTML elements using `getElementById()`:
+
+```javascript
+const budgetDisplay =
+    document.getElementById("budgetDisplay");
+```
+
+The application then changes the content using `textContent`:
+
+```javascript
+budgetDisplay.textContent =
+    "KSh " + monthlyBudget.toLocaleString();
+```
+
+JavaScript also creates table rows dynamically:
+
+```javascript
+const row = document.createElement("tr");
+```
+
+The new row is then added to the webpage:
+
+```javascript
+expenseTableBody.appendChild(row);
+```
+
+This means the user can add an expense and immediately see it appear on the dashboard.
+
+## 5. Event Listeners
+
+Event listeners allow SpendWise to respond to user actions.
+
+The budget form listens for a submit event:
+
+```javascript
+budgetForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+});
+```
+
+The expense form also listens for submissions:
+
+```javascript
+expenseForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+});
+```
+
+The Profile button listens for a click:
+
+```javascript
+profileButton.addEventListener("click", function() {
+    alert("Welcome to your SpendWise Dashboard!");
+});
+```
+
+These events connect user actions to JavaScript logic.
+
+## 6. Calculations
+
+SpendWise calculates total expenses by looping through the expenses array:
+
+```javascript
+function calculateTotalExpenses() {
+
+    let total = 0;
+
+    for (let i = 0; i < expenses.length; i++) {
+        total += expenses[i].amount;
+    }
+
+    return total;
+}
 ```
 
 The remaining balance is calculated by subtracting total expenses from the monthly budget:
 
 ```javascript
-remainingBalance = monthlyBudget - totalExpenses;
+function calculateRemainingBalance() {
+    const totalExpenses = calculateTotalExpenses();
+
+    return monthlyBudget - totalExpenses;
+}
 ```
 
-For example:
+## 7. User Interaction Flow
+
+The application follows this process:
 
 ```text
-Remaining Balance = Monthly Budget - Total Expenses
+User enters budget
+        ↓
+JavaScript stores the budget
+        ↓
+User adds an expense
+        ↓
+Expense is stored in the array
+        ↓
+JavaScript processes the expense records
+        ↓
+Total expenses are calculated
+        ↓
+Remaining balance is calculated
+        ↓
+DOM is updated
+        ↓
+User sees the new information on the dashboard
 ```
 
-## Functions
+## 8. Challenges and Solutions
 
-Functions are used to organize the JavaScript code into reusable sections.
+### Challenge 1: Managing Multiple Expenses
 
-The project includes a function for calculating total expenses:
+Using separate variables for every expense would make the application difficult to manage.
 
-```javascript
-function calculateTotalExpenses() {
-    totalExpenses =
-        foodExpense +
-        transportExpense +
-        rentExpense +
-        entertainmentExpense +
-        utilitiesExpense;
+**Solution:** An array was used to store multiple expense objects.
 
-    return totalExpenses;
-}
-```
+### Challenge 2: Updating the Page
 
-There is also a function for calculating the remaining balance:
+The original SpendWise project mainly displayed static information.
 
-```javascript
-function calculateRemainingBalance(budget, expenses) {
-    return budget - expenses;
-}
-```
+**Solution:** DOM manipulation was added so JavaScript can update the dashboard whenever the user adds or changes information.
 
-The function accepts two parameters:
+### Challenge 3: Handling Invalid Input
 
-* `budget`
-* `expenses`
+Users might enter an invalid budget or expense amount.
 
-It then subtracts the expenses from the budget and returns the result.
+**Solution:** Conditional statements validate the input before it is processed.
 
-## User Input Function
+### Challenge 4: Keeping Calculations Updated
 
-The `getUserBudget()` function is responsible for collecting and validating the user's budget.
+Adding a new expense changes the total expenses and remaining balance.
 
-```javascript
-function getUserBudget() {
-    let userInput = prompt(
-        "Enter your monthly budget in KSh:"
-    );
-
-    if (userInput !== null && userInput.trim() !== "") {
-        monthlyBudget = Number(userInput);
-
-        if (!isNaN(monthlyBudget) && monthlyBudget >= 0) {
-            return monthlyBudget;
-        }
-    }
-
-    console.log("Invalid budget entered.");
-    return 0;
-}
-```
-
-This keeps the user-input logic separate from the calculation logic.
-
-## Displaying Results
-
-The calculated results are displayed in the browser console using `console.log()`.
-
-The application displays:
-
-* Monthly budget
-* Total expenses
-* Remaining balance
-* Savings
-
-Example:
-
-```javascript
-console.log("Monthly Budget: KSh " + monthlyBudget);
-console.log("Total Expenses: KSh " + totalExpenses);
-console.log("Remaining Balance: KSh " + remainingBalance);
-```
-
-To view the results:
-
-1. Open `index.html` in a browser.
-2. Enter your monthly budget when the prompt appears.
-3. Right-click the page.
-4. Select **Inspect**.
-5. Open the **Console** tab.
-6. View the SpendWise budget report.
+**Solution:** Functions are called again after each new expense so the dashboard stays updated.
 
 ## Technologies Used
 
 * HTML5
 * CSS3
 * JavaScript
+* DOM Manipulation
+* Arrays
+* Loops
+* Conditional Statements
+* Event Listeners
 * CSS Grid
 * Flexbox
 * Google Fonts
 
 ## How to Run
 
-1. Open the SpendWise project folder.
-2. Make sure these files are present:
+1. Clone or download the SpendWise project.
+2. Open the project folder.
+3. Make sure these files are present:
 
-   * `index.html`
-   * `style.css`
-   * `script.js`
-   * `README.md`
-3. Open `index.html` in a web browser.
-4. Enter your monthly budget when prompted.
-5. Open the browser console to view the calculated results.
+```text
+index.html
+style.css
+script.js
+README.md
+```
+
+4. Open `index.html` in a web browser.
+5. Enter a monthly budget.
+6. Add expenses using the expense form.
+7. View the updated expense table and dashboard totals.
 
 ## Testing
 
-The application should be tested with different budget values to make sure the calculations work correctly.
+The application should be tested by:
 
-For example:
-
-```text
-Monthly Budget: KSh 50000
-Total Expenses: KSh 33500
-Remaining Balance: KSh 16500
-```
+* Entering a valid budget.
+* Entering an invalid budget.
+* Adding multiple expenses.
+* Checking different expense categories.
+* Checking the remaining balance.
+* Testing what happens when expenses exceed the budget.
+* Testing the Profile button.
+* Confirming that new expenses appear in the table.
+* Confirming that category totals update correctly.
 
 ## Author
 
 Guled Kusow
-
